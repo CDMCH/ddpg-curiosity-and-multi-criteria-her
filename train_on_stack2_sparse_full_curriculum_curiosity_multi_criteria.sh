@@ -2,14 +2,19 @@
 
 SEED=3
 
-if [ -z ${ALL_GPUS+x} ]; then echo "ALL_GPUS needs to be set"; exit 1; else echo "ALL_GPUS is set to '$ALL_GPUS'"; fi
+OPENAI_LOG_FORMAT='stdout,log,csv,tensorboard'
+
+GPU_MESSAGE="Set environment variable ALL_GPUS to train with GPUs.\n"
+GPU_EXAMPLE="For example, if you have two GPUs with device numbers 0 and 1, to use both of them, set ALL_GPUS to \"[0, 1]\".\nIf you have one GPU, set ALL_GPUS to \"[0]\".\n"
+
+printf "ALL_GPUS is set to \"${ALL_GPUS}\"\n"
+
+if [ -z ${ALL_GPUS+x} ]; then printf "${GPU_MESSAGE}"; printf "${GPU_EXAMPLE}"; ALL_GPUS='none'; fi
 
 date_string=$(date '+%m-%d-%Y_%H:%M:%S')
-part1_dir=stack_2_SPARSE_full_curriculum_\(pt1_trainer_easy\)_intrinsic_sub_goals_no_epsilon_horizon_50_SEED_${SEED}_${date_string}
-part2_dir=stack_2_SPARSE_full_curriculum_\(pt2_stacking_curriculum\)_intrinsic_sub_goals_no_epsilon_horizon_50_SEED_${SEED}_${date_string}
-part3_dir=stack_2_SPARSE_full_curriculum_\(pt3_test\)_intrinsic_sub_goals_no_epsilon_horizon_50_SEED_${SEED}_${date_string}
-
-source $HOME/bin/mujoco_time
+part1_dir=logs/stack_2_SPARSE_full_curriculum_\(pt1_trainer_easy\)_curiosity_multi_criteria_horizon_50_SEED_${SEED}_${date_string}
+part2_dir=logs/stack_2_SPARSE_full_curriculum_\(pt2_stacking_curriculum\)_curiosity_multi_criteria_horizon_50_SEED_${SEED}_${date_string}
+part3_dir=logs/stack_2_SPARSE_full_curriculum_\(pt3_test\)_curiosity_multi_criteria_horizon_50_SEED_${SEED}_${date_string}
 
 OPENAI_LOGDIR=${part1_dir} \
 mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
@@ -69,8 +74,6 @@ mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
 --stop-at-score 0.85 \
 --save-checkpoints-at '[0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95]' \
 --split-gpu-usage-among-device-nums "$ALL_GPUS"
-# --save-at-score 0 \
-# --restore-from-ckpt '/home/jb/fixing_bug_logs/Stack5_VERY_PARALLEL_0p5_0
 
 
 OPENAI_LOGDIR=${part2_dir} \
