@@ -40,8 +40,8 @@ cd ddpg-with-curiosity-and-multi-criteria-her
 ```
 If using virtualenv, create a new virtualenv and activate it
 ```bash
-    virtualenv env --python=python3
-    . env/bin/activate
+virtualenv env --python=python3
+. env/bin/activate
 ```
 Install baselines package
 ```bash
@@ -56,5 +56,5 @@ They use the [MuJoCo](http://www.mujoco.org) physics simulator, which is proprie
 
 After installing the block stacking environments, you can run the example script to train an agent to stack 2 blocks with sparse rewards:
 ```
-    ./train_on_stack2_sparse_full_curriculum_curiosity_multi_criteria.sh
+./train_on_stack2_sparse_full_curriculum_curiosity_multi_criteria.sh
 ```
