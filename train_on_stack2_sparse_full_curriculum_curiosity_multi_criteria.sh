@@ -12,7 +12,7 @@ part3_dir=stack_2_SPARSE_full_curriculum_\(pt3_test\)_intrinsic_sub_goals_no_eps
 source $HOME/bin/mujoco_time
 
 OPENAI_LOGDIR=${part1_dir} \
-mpiexec -n 8 python -m baselines.ddpg.main \
+mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
 --env-id 'FetchStack2SparseTrainerEasy-v1' \
 --do-evaluation 'True' \
 --render-eval 'False' \
@@ -74,7 +74,7 @@ mpiexec -n 8 python -m baselines.ddpg.main \
 
 
 OPENAI_LOGDIR=${part2_dir} \
-mpiexec -n 8 python -m baselines.ddpg.main \
+mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
 --env-id 'FetchStack2Sparse-v1' \
 --do-evaluation 'True' \
 --render-eval 'False' \
@@ -135,7 +135,7 @@ mpiexec -n 8 python -m baselines.ddpg.main \
 --split-gpu-usage-among-device-nums "$ALL_GPUS"
 
 OPENAI_LOGDIR=${part3_dir} \
-mpiexec -n 8 python -m baselines.ddpg.main \
+mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
 --env-id 'FetchStack2SparseTest-v1' \
 --do-evaluation 'True' \
 --render-eval 'False' \

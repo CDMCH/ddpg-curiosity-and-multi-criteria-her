@@ -1,14 +1,13 @@
 from setuptools import setup, find_packages
-from functools import reduce
 import sys
 
 if sys.version_info.major != 3:
     print('This Python is only compatible with Python 3, but you are running '
           'Python {}. The installation will likely fail.'.format(sys.version_info.major))
 
-setup(name='baselines',
+setup(name='ddpg_curiosity_mc_her',
       packages=[package for package in find_packages()
-                if package.startswith('baselines')],
+                if package.startswith('ddpg_curiosity_mc_her')],
       install_requires=[
           'gym[mujoco]',
           'scipy',
@@ -24,10 +23,10 @@ setup(name='baselines',
           'plotly',
           'matplotlib'
       ],
-      description='OpenAI baselines: high quality implementations of reinforcement learning algorithms',
-      author='OpenAI',
+      description='DDPG with Curiosity and Multi-Criteria HER, modified from OpenAI baselines.',
+      author='',
       url='https://github.com/openai/baselines',
-      author_email='gym@openai.com',
+      author_email='',
       version='0.1.5')
 
 
