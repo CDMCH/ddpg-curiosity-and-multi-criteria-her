@@ -4,7 +4,7 @@ SEED=3
 
 OPENAI_LOG_FORMAT='stdout,log,csv,tensorboard'
 
-GPU_MESSAGE="Set environment variable ALL_GPUS to train with GPUs.\n"
+GPU_MESSAGE="Set environment variable ALL_GPUS to evenly divide the parallel workers among all GPUs.\n"
 GPU_EXAMPLE="For example, if you have two GPUs with device numbers 0 and 1, to use both of them, set ALL_GPUS to \"[0, 1]\".\nIf you have one GPU, set ALL_GPUS to \"[0]\".\n"
 
 printf "ALL_GPUS is set to \"${ALL_GPUS}\"\n"
