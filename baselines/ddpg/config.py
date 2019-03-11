@@ -1,4 +1,9 @@
 import gym
+try:
+    import gym_fetch_stack
+except ImportError:
+    pass
+
 import os
 import ast
 from collections import OrderedDict
