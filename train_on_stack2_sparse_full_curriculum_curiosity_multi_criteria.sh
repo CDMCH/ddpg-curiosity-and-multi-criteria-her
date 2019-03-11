@@ -72,7 +72,7 @@ mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
 --mix-extrinsic-intrinsic-objectives-for-explore '0.5,0.5' \
 --sub-goal-divisions '[[0,1,2],[3,4,5]]' \
 --stop-at-score 0.85 \
---save-checkpoints-at '[0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95]' \
+--save-checkpoints-at '[0.95]' \
 --split-gpu-usage-among-device-nums "$ALL_GPUS"
 
 
@@ -133,9 +133,10 @@ mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
 --sub-goal-divisions '[[0,1,2],[3,4,5]]' \
 --restore-from-ckpt ${part1_dir}/saved_model/model.ckpt \
 --save-at-score 0.90 \
---save-checkpoints-at '[0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95]' \
+--save-checkpoints-at '[0.95]' \
 --stop-at-score 0.95 \
 --split-gpu-usage-among-device-nums "$ALL_GPUS"
+
 
 OPENAI_LOGDIR=${part3_dir} \
 mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
@@ -194,5 +195,6 @@ mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
 --sub-goal-divisions '[[0,1,2],[3,4,5]]' \
 --restore-from-ckpt ${part2_dir}/saved_model/model.ckpt \
 --save-at-score 0.80 \
---save-checkpoints-at '[0.5, 0.6, 0.7, 0.8, 0.9, 0.95]' \
+--stop-at-score 0.99 \
+--save-checkpoints-at '[0.95]' \
 --split-gpu-usage-among-device-nums "$ALL_GPUS"
