@@ -1,9 +1,31 @@
 import baselines.common.tf_util as U
 
 import tensorflow as tf
-from baselines.her.util import nn
 from baselines import logger
 from baselines.common.mpi_adam import MpiAdam
+
+
+def nn(input, layers_sizes, reuse=None, flatten=False, use_layer_norm=False, name=""):
+    """Creates a simple neural network
+    """
+    for i, size in enumerate(layers_sizes):
+        activation = tf.nn.relu if i < len(layers_sizes) - 1 else None
+        norm = tf.contrib.layers.layer_norm if i < len(layers_sizes) - 1 else None
+        input = tf.layers.dense(inputs=input,
+                                units=size,
+                                kernel_initializer=tf.contrib.layers.xavier_initializer(),
+
+                                reuse=reuse,
+                                name=name + '_' + str(i))
+        if use_layer_norm and norm:
+            print("layer norm")
+            input = norm(input, reuse=reuse, scope=name + '_layer_norm_' + str(i))
+        if activation:
+            input = activation(input)
+    if flatten:
+        assert layers_sizes[-1] == 1
+        input = tf.reshape(input, [-1])
+    return input
 
 
 def _vars(scope):
