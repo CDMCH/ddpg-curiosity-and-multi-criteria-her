@@ -104,8 +104,5 @@ if __name__ == '__main__':
     logger.configure()
 
     dict_args = prepare_params(dict_args)
-    # logger.configure()
-    # if MPI.COMM_WORLD.Get_rank() == 0:
     log_params(dict_args)
-    # Run actual script.
     run(dict_args)

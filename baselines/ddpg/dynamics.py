@@ -1,14 +1,10 @@
-from collections import OrderedDict
 import baselines.common.tf_util as U
 
 import tensorflow as tf
-from baselines.her.util import store_args, nn
+from baselines.her.util import nn
 from baselines import logger
 from baselines.common.mpi_adam import MpiAdam
-from baselines.a2c.utils import fc
-from baselines.her.util import (
-    import_function, store_args, flatten_grads, transitions_in_episode_batch)
-import numpy as np
+
 
 def _vars(scope):
     res = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=scope)

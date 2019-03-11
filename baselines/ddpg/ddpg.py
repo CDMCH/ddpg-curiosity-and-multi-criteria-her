@@ -1,4 +1,3 @@
-from copy import copy
 from functools import reduce
 
 import numpy as np
@@ -12,7 +11,7 @@ from baselines import logger
 from baselines.common.mpi_adam import MpiAdam
 import baselines.common.tf_util as U
 from baselines.common.mpi_running_mean_std import RunningMeanStd
-from baselines.ddpg.PopArtMeanStd import PopArtMeanStd
+from baselines.ddpg.popart_mean_std import PopArtMeanStd
 from mpi4py import MPI
 
 

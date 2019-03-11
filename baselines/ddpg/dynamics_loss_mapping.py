@@ -1,6 +1,5 @@
 import os
 import numpy as np
-from scipy.stats import gaussian_kde
 import matplotlib.pyplot as plt
 from mpi4py import MPI
 

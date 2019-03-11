@@ -1,5 +1,4 @@
 import gym
-import gym_fetch_stack
 import os
 import ast
 from collections import OrderedDict
@@ -8,7 +7,6 @@ from baselines.ddpg.ddpg import DDPG
 from baselines.ddpg.her import make_sample_her_transitions
 from baselines.ddpg.noise import *
 from baselines.ddpg.replay_buffer import ReplayBuffer
-from baselines.ddpg.ring_buffer import Memory as RingBuffer
 from baselines.ddpg.rollout import RolloutWorker
 from baselines.ddpg.dynamics_loss_mapping import DynamicsLossMapper
 from mpi4py import MPI
@@ -415,26 +413,14 @@ def configure_replay_buffer(params):
     return ReplayBuffer(buffer_shapes, buffer_size, params['T'], sample_transitions, params['use_her'])
 
 
-def configure_ring_buffer(params):
-    logger.info('Using Ring Buffer')
-    assert params['use_her'] is False
-
-    input_dims = configure_dims(params)
-    input_shapes = dims_to_shapes(input_dims)
-
-    buffer_size = (params['buffer_size'] // params['rollout_batch_size']) * params['rollout_batch_size']
-    return RingBuffer(limit=buffer_size, action_shape=input_shapes['u'], observation_shape=input_shapes['o'],
-                      intrinsic_reward_vals_only=params['separate_explore_ring_buffer'])
-
-
 def configure_memory(params):
     memory_type = params['memory_type']
     if memory_type == 'replay_buffer':
         return configure_replay_buffer(params)
     elif memory_type == 'ring_buffer':
-        return configure_ring_buffer(params)
+        raise NotImplementedError
     else:
-        raise ValueError('memory_type must either be \'replay_buffer\' or \'ring_buffer\'.')
+        raise ValueError('memory_type must be \'replay_buffer\'.')
 
 
 def configure_ddpg_agent(sess, role, memory, input_dims, external_critic_fn, params):
