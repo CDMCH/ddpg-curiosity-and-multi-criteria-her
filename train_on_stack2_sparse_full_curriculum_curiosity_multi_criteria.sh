@@ -18,7 +18,7 @@ part3_dir=logs/stack_2_SPARSE_full_curriculum_\(pt3_test\)_curiosity_multi_crite
 
 OPENAI_LOGDIR=${part1_dir} \
 mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
---env-id 'FetchStack2SparseTrainerEasy-v1' \
+--env-id 'FetchStack2SparseStage1-v1' \
 --do-evaluation 'True' \
 --render-eval 'False' \
 --render-training 'False' \
@@ -78,7 +78,7 @@ mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
 
 OPENAI_LOGDIR=${part2_dir} \
 mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
---env-id 'FetchStack2Sparse-v1' \
+--env-id 'FetchStack2SparseStage2-v1' \
 --do-evaluation 'True' \
 --render-eval 'False' \
 --render-training 'False' \
@@ -140,7 +140,7 @@ mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
 
 OPENAI_LOGDIR=${part3_dir} \
 mpiexec -n 8 python -m ddpg_curiosity_mc_her.ddpg.main \
---env-id 'FetchStack2SparseTest-v1' \
+--env-id 'FetchStack2SparseStage3-v1' \
 --do-evaluation 'True' \
 --render-eval 'False' \
 --render-training 'False' \
