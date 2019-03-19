@@ -58,3 +58,9 @@ After installing the block stacking environments, you can run the example script
 ```
 ./train_on_stack2_sparse_full_curriculum_curiosity_multi_criteria.sh
 ```
+Or visualize the pretrained agents with:
+```
+./watch_stack2.sh
+./watch_stack3.sh
+./watch_stack4.sh
+```
