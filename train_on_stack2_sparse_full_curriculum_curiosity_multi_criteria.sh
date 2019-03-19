@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SEED=3
+SEED=42
 
 OPENAI_LOG_FORMAT='stdout,log,csv,tensorboard'
 
